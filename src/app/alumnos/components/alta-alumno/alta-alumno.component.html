@@ -1,0 +1,69 @@
+<div class="container-fluid container-form-alumnos ">
+  <div class="row">
+    <div class="col-md-12 alta-alumno">
+      <h1 appTitleEstilo>Alta Alumno</h1>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <form [formGroup]="formularioAltaAlumno">
+      <div>
+        <div class="row datos">
+          <div class="col-md-12">
+            <mat-form-field appearance="fill">
+              <mat-label>Dni Alumno</mat-label>
+              <input matInput formControlName="dni">
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <mat-form-field appearance="fill">
+              <mat-label>NombreAlumno</mat-label>
+              <input matInput formControlName="nombre">
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <mat-form-field appearance="fill">
+              <mat-label>Apellido Alumno</mat-label>
+              <input matInput formControlName="apellido">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row datos">
+          <div class="col-md-12">
+            <mat-form-field appearance="fill" class="fill">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput [matDatepicker]="fechaNacimiento" formControlName="fechaNacimiento">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
+              <mat-datepicker #fechaNacimiento></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row datos">
+          <div class="col-md-12">
+            <button mat-raised-button color="primary" type="submit" (click)="altaAlumno()"
+                    [disabled]="formularioAltaAlumno.invalid">Alta Alumno
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <div *ngIf="alumnoData as alumno">
+    <mat-card class="example-card" *ngIf="alumno.length > 0; else loading">
+      <mat-card-subtitle>Alumno</mat-card-subtitle>
+      <mat-card-title>{{alumno[0].nombre}},{{alumno[0].apellido}}</mat-card-title>
+      <mat-card-content>
+        <p>DNI: {{ alumno[0].dni}}</p>
+        <p>{{ alumno[0].fechaNacimiento | date}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Actualizar datos</button>
+        <button mat-button>Darme de baja</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
